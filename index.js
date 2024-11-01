@@ -14,18 +14,7 @@ const appointmentRoutes = require('./routes/appointmentRoutes');
 require('dotenv').config();
 const app = express();
 app.use(express.json());
-
-// Configurer CORS pour n'autoriser que les domaines de Vercel
-const allowedOrigins = [/\.vercel\.app$/]; // Utilisation d'une regex pour accepter tous les sous-domaines de Vercel
-app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.some((pattern) => pattern.test(origin))) {
-      callback(null, true);
-    } else {
-      callback(new Error('Non autorisé par CORS'));
-    }
-  }
-}));
+app.use(cors());
 
 // Route de test pour vérifier si l'API est en ligne
 app.get('/', (req, res) => {
