@@ -1,11 +1,12 @@
-import pg from 'pg';
-import { Sequelize } from 'sequelize';
+const pg = require('pg');
+const { Sequelize } = require('sequelize');
+require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
 
-require('dotenv').config();
+console.log("DATABASE_URL:", process.env.DATABASE_URL);
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
-  dialectModule: pg,  
+  dialectModule: pg,
   logging: false,
   dialectOptions: {
     ssl: {
