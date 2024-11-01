@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mariadb:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mariadb_searchVeto_container
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: searchVeto
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - searchVeto_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin_searchVeto_container
+    environment:
+      PMA_HOST: mariadb_searchVeto_container
+      PMA_USER: user
+      PMA_PASSWORD: userpassword
+      PMA_PORT: 3306
+    ports:
+      - "8080:80"
+    depends_on:
+      - mariadb
+
+volumes:
+  searchVeto_data:
