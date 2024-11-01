@@ -1,5 +1,5 @@
 const express = require('express');
-const sequelize = require('./config/database');
+
 const cors = require('cors');
 const User = require('./models/User');
 const Clinic = require('./models/Clinic');
@@ -22,11 +22,7 @@ app.get('/', (req, res) => {
 });
 
 // Routes existantes
-app.use('/auth', authRoutes);
-app.use('/clinics', clinicRoutes);
-app.use('/animals', animalRoutes);
-app.use('/timeSlots', timeSlotRoutes);
-app.use('/appointments', appointmentRoutes);
+
 
 async function startServer() {
   try {
